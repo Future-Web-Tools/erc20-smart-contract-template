@@ -1,0 +1,68 @@
+{
+  "name": "future-web-erc20-token-contract-template",
+  "version": "0.1.0",
+  "description": "Future Web ERC20 token contract template",
+  "main": "",
+  "private": true,
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.0.0"
+  },
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.2",
+    "@nomiclabs/hardhat-etherscan": "^2.1.2",
+    "@nomiclabs/hardhat-solhint": "^2.0.0",
+    "@nomiclabs/hardhat-waffle": "^2.0.1",
+    "chai": "^4.3.4",
+    "eslint": "^7.25.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "ethereum-waffle": "^3.3.0",
+    "ethers": "^5.1.4",
+    "hardhat": "^2.2.1",
+    "hardhat-abi-exporter": "^2.2.1",
+    "hardhat-contract-sizer": "^2.0.3",
+    "husky": "4.3.8",
+    "lint-staged": "^10.5.4",
+    "prettier": "^2.3.1",
+    "prettier-plugin-solidity": "^1.0.0-beta.13",
+    "solc-0.8": "npm:solc@0.8.0",
+    "solidity-coverage": "^0.7.16",
+    "solidity-docgen": "^0.5.13"
+  },
+  "scripts": {
+    "test": "npx hardhat test",
+    "compile": "npx hardhat compile",
+    "coverage": "hardhat coverage",
+    "lint:contract": "solhint --max-warnings 0 \"contracts/**/*.sol\"",
+    "lint:test": "eslint ./test/**/*.js --fix",
+    "lint:scripts": "eslint ./scripts/**/*.js --fix",
+    "lint:config": "eslint ./hardhat.config.js --no-ignore .solcover.js .eslintrc.js --fix",
+    "lint": "npm run pre && npm run lint:test && npm run lint:config && npm run lint:scripts",
+    "prettier": "prettier --write \"contracts/**/*.sol\"",
+    "pre": "npm run prettier && npm run lint:contract",
+    "confirm": "npm run lint && npm run test",
+    "deploy:staging": "npm run confirm && npx hardhat run --network staging scripts/deploy.js",
+    "deploy:mainnet": "npm run confirm && npx hardhat run --network mainnet scripts/deploy.js",
+    "size": "yarn run hardhat size-contracts"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix"
+    ],
+    "*.sol": [
+      "npm run pre"
+    ]
+  },
+  "author": "",
+  "license": "MIT"
+}
